@@ -19,11 +19,19 @@ body{
     line-height: 1pt;
 }
 
-header nav{
+nav{
     font-family: "Akira", sans-serif;
 }
 
-header nav li a:hover{
+nav li a:hover{
     background-color: #ffc107 !important;
     color: #343a40 !important;
 }
+
+/*Main/Contenido*/
+
+main h1{
+    font-family: "Akira";
+}
+
+
