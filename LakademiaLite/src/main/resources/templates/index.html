@@ -12,7 +12,7 @@
     <title>Lakademia - Inicio</title>
 
     <!--Icono Pestañas-->
-    <link rel="shortcut icon" href="../static/img/logo LK.png" type="image/x-icon">
+    <link rel="shortcut icon" href="../static/img/logo LK.png" th:href="@{/img/logo LK.png}" type="image/x-icon">
 
     <!--Página de estilos-->
     <link rel="stylesheet" href="../static/css/estilos.css" th:href="@{/css/estilos.css}">
@@ -156,7 +156,7 @@
             <section class="bg-dark text-light container-fluid py-5 px-0 px-lg-3 mx-0 text-center border-bottom border-warning border-3">
                 <h1>Conocenos</h1>
                 <div class="my-5">
-                    <img width="35%" src="../static/img/jero.jpg" alt="jero desarrollador"
+                    <img width="35%" src="../static/img/jero.jpg" th:src="@{/img/jero.jpg}" alt="jero desarrollador"
                         class="rounded-circle img-fluid border border-secondary border-5">
                 </div>
                 <li>
@@ -201,15 +201,15 @@
             <div class="col-12 col-lg-3 bg-dark py-5  my-2 text-center border border-secondary">
                 <h3>Redes:</h3>
                 <a href="https://www.facebook.com/zuck" title="Mark Zuckerberg" class="text-decoration-none">
-                    <img class="pt-2 mx-2" width="10%" src="../static/img/facebook.png" alt="Facebook">
+                    <img class="pt-2 mx-2" width="10%" src="../static/img/facebook.png" th:src="@{/img/facebook.png}" alt="Facebook">
                 </a>
                 <a href="https://www.instagram.com/thisisbillgates/?hl=es" title="Bill Gates"
                     class="text-decoration-none">
-                    <img class="pt-2 mx-2" width="10%" src="../static/img/instagram.png" alt="Instagram">
+                    <img class="pt-2 mx-2" width="10%" src="../static/img/instagram.png" th:src="@{/img/instagram.png}" alt="Instagram">
                 </a>
                 <a href="https://www.instagram.com/thisisbillgates/?hl=es" title="Kim Dotcom"
                     class="text-decoration-none">
-                    <img class="pt-2 mx-2" width="10%" src="../static/img/gorjeo.png" alt="Twitter">
+                    <img class="pt-2 mx-2" width="10%" src="../static/img/gorjeo.png" th:src="@{/img/gorjeo.png}" alt="Twitter">
                 </a>
             </div>
             <div class="col-12 col-lg-3 bg-dark py-5 my-2 text-center border border-secondary">
