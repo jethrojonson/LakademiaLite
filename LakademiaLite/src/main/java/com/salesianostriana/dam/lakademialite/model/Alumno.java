@@ -21,15 +21,19 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Alumno implements UserDetails{
 	
+	private static final long serialVersionUID = 1746882337033536373L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Long id;
@@ -45,7 +49,6 @@ public class Alumno implements UserDetails{
 	private String email;
 	
 	private String password;
-	private boolean admin;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable
@@ -72,12 +75,7 @@ public class Alumno implements UserDetails{
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		String role = "ROLE_";
-		if (admin) {
-			role += "ADMIN";
-		} else {
-			role += "USER";
-		}
+		String role = "ALUMNO";
 		return Arrays.asList(new SimpleGrantedAuthority(role));
 	}
 

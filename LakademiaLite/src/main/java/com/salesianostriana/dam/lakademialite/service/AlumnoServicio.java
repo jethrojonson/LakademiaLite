@@ -11,6 +11,10 @@ import com.salesianostriana.dam.lakademialite.service.base.BaseService;
 @Service
 public class AlumnoServicio extends BaseService<Alumno, Long, IAlumnoRepository>{
 	
+	public AlumnoServicio(IAlumnoRepository repo) {
+		super(repo);
+	}
+	
 	public Optional<Alumno> buscarPorEmail(String email) {
 		return repositorio.findFirstByEmail(email);
 	}
