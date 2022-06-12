@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+    <!--FRAGMENTO DE LA BARRA DE NAVEGACION-->
+    <nav th:fragment="barra-navegacion"
+        class="navbar navbar-expand-lg bg-secondary px-lg-5 sticky-top border-bottom border-top border-warning border-3">
+        <div class="container-fluid">
+            <span class="navbar-brand text-warning mx-lg-4 px-lg-5">Menu</span>
+            <button class="navbar-toggler navbar-toggle bg-light" type="button" data-bs-toggle="collapse"
+                data-bs-target="#menu-principal" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="menu-principal">
+                <ul class="navbar-nav container-fluid justify-content-evenly py-lg-0 py-2">
+                    <li class="nav-item">
+                        <a class="nav-link text-light rounded px-2" href="./index.html#inicio"
+                            th:href="@{/index#inicio}">Inicio</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light rounded px-2" href="./index.html#codigoEtico"
+                            th:href="@{/index#codigoEtico}">Codigo etico</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light rounded px-2" href="./index.html#conocenos"
+                            th:href="@{/index#conocenos}">Conocenos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-light rounded px-2" href="./clases.html"
+                            th:href="@{/alumno/clases}">Clases</a>
+                    </li>
+                    <li class="nav-item">
+                        <!-- Example split danger button -->
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-danger"><span sec:authentication="name"></span>Log in</button>
+                            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                                data-bs-toggle="dropdown" aria-expanded="false">
+                                <span class="visually-hidden">Toggle Dropdown</span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li><a class="dropdown-item" href="./login.html"
+                                        th:href="@{/login}">Entrar</a></li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li><a class="dropdown-item" href="href./registro.html"
+                                        th:href="@{/registro}">Registrarse</a></li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</body>
+
+</html>

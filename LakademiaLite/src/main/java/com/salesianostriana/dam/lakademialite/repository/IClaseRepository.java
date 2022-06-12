@@ -4,6 +4,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.salesianostriana.dam.lakademialite.model.Clase;
 
-public interface ClaseRepository extends JpaRepository <Clase,Long>{
+public interface IClaseRepository extends JpaRepository <Clase, Long>{
 
 }

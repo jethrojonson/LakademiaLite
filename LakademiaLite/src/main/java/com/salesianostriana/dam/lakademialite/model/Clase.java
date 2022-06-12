@@ -7,6 +7,7 @@ import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
@@ -16,20 +17,21 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Clase {
 	
 	@Id
-	@GeneratedValue
-	private Long claseId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	
 	private String tituloClase;
-	private String precio;
 	private String descripcion;
-	private LocalDateTime fechaYHora;
-	private int numeroPlazas;
+	private LocalDateTime FechaYHora;
+	private double precio;
+	private int plazas;
 	
-	@ManyToMany(mappedBy="clases",fetch = FetchType.EAGER)
-	private List <Alumno> alumnos = new ArrayList <> ();
+	@ManyToMany(mappedBy = "listaClases", fetch = FetchType.EAGER)
+	private List <Alumno> listaAlumnos = new ArrayList<Alumno>();
+
 }

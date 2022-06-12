@@ -2,9 +2,9 @@ package com.salesianostriana.dam.lakademialite.service.base;
 
 import java.util.List;
 
-public interface IBaseService <T,ID>{
+public interface IBaseService <T, ID> {
 	
-	T save (T t);
+	T save(T t);
 	
 	T findById(ID id);
 	
@@ -15,5 +15,7 @@ public interface IBaseService <T,ID>{
 	void delete(T t);
 	
 	void deleteById(ID id);
+	
+	
 	
 }

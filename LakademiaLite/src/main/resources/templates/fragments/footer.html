@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head></head>
+
+<body>
+
+    <!--FRAMENTO DEL FOOTER-->
+    <footer th:fragment="footer"
+        class="container-fluid row mx-0 px-0 py-2 py-lg-1 bg-secondary text-secondary">
+        <div class="col-12 col-lg-3 bg-dark py-5  my-2 text-center border border-secondary">
+            <h3>Created by:</h3>
+            <p class="pt-2">Jerónimo M. Pérez González</p>
+            <span>1º DAM - Colegio San Pedro (Salesianos Triana)</span>
+        </div>
+        <div class="col-12 col-lg-3 bg-dark py-5  my-2 text-center border border-secondary">
+            <h3>Contacto:</h3>
+            <li class="pt-2"><a class=""
+                    href="mailto:perez.gojer22@triana.salesianos.edu">perez.gojer22@triana.salesianos.edu</a></li>
+        </div>
+        <div class="col-12 col-lg-3 bg-dark py-5  my-2 text-center border border-secondary">
+            <h3>Redes:</h3>
+            <a href="https://www.facebook.com/zuck" title="Mark Zuckerberg" class="text-decoration-none">
+                <img class="pt-2 mx-2" width="10%" src="../static/img/facebook.png" th:src="@{/img/facebook.png}"
+                    alt="Facebook">
+            </a>
+            <a href="https://www.instagram.com/thisisbillgates/?hl=es" title="Bill Gates" class="text-decoration-none">
+                <img class="pt-2 mx-2" width="10%" src="../static/img/instagram.png" th:src="@{/img/instagram.png}"
+                    alt="Instagram">
+            </a>
+            <a href="https://www.instagram.com/thisisbillgates/?hl=es" title="Kim Dotcom" class="text-decoration-none">
+                <img class="pt-2 mx-2" width="10%" src="../static/img/gorjeo.png" th:src="@{/img/gorjeo.png}"
+                    alt="Twitter">
+            </a>
+        </div>
+        <div class="col-12 col-lg-3 bg-dark py-5 my-2 text-center border border-secondary">
+            <h3>Aviso Legal:</h3>
+            <p class="pt-2">Todos los derechos reservados ad eternum. Cualquier uso indebido será demandado.</p>
+            <span>- Atentamente: J-Sofware®</span>
+        </div>
+    </footer>
+
+</body>
+
+</html>

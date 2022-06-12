@@ -1,8 +1,6 @@
 package com.salesianostriana.dam.lakademialite.model;
 
 import java.time.LocalDate;
-import java.time.temporal.ChronoUnit;
-import java.time.temporal.TemporalAdjusters;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -12,6 +10,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
@@ -27,20 +26,20 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Alumno implements UserDetails{
 	
-	private static final long serialVersionUID =  1409538586158223652L;
-	
 	@Id
-	@GeneratedValue
-	private Long alumnoId;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	
-	private String nombreAlumno;
-	private String apellidosAlumno;
-	private LocalDate fechaNac;
+	private String nombre;
+	private String apellidos;
 	private String dni;
+	private LocalDate fechaNac;
+	
+	/*USERNAME*/
 	
 	@Column(unique = true)
 	private String email;
@@ -49,15 +48,30 @@ public class Alumno implements UserDetails{
 	private boolean admin;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(
-			joinColumns = @JoinColumn(name="alumno_id"),
-			inverseJoinColumns = @JoinColumn(name="clase_id")
-			)
-	private List <Clase> clases = new ArrayList <> (); 
-/*METODOS INTERFAZ UserDetails*/
+	@JoinTable
+		(
+			name = "alumno_clases",
+			joinColumns = @JoinColumn (name = "alumno_id"),
+			inverseJoinColumns = @JoinColumn (name = "clase_id")
+		)
+	private List <Clase> listaClases = new ArrayList <Clase>();
+	
+	/*METODOS HELPERS*/
+	
+	public void addClase(Clase c) {
+		listaClases.add(c);
+		c.getListaAlumnos().add(this);
+	}
+	
+	public void removeClase(Clase c) {
+		listaClases.remove(c);
+		c.getListaAlumnos().remove(this);
+	}
+
+	/*METODOS DE LA INTERFAZ UserDetails*/
 	
 	@Override
-	public Collection<? extends GrantedAuthority> getAuthorities(){
+	public Collection<? extends GrantedAuthority> getAuthorities() {
 		String role = "ROLE_";
 		if (admin) {
 			role += "ADMIN";
@@ -66,54 +80,31 @@ public class Alumno implements UserDetails{
 		}
 		return Arrays.asList(new SimpleGrantedAuthority(role));
 	}
-	
+
 	@Override
 	public String getUsername() {
-		return email;
+		return null;
 	}
-	
+
 	@Override
 	public boolean isAccountNonExpired() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean isAccountNonLocked() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean isCredentialsNonExpired() {
-		return true;
+		return false;
 	}
 
 	@Override
 	public boolean isEnabled() {
-		return true;
+		return false;
 	}
-	
-/*METODOS HELPERS*/
-
-	public int getEdad() {
-		return (int) ChronoUnit.YEARS
-				.between(fechaNac, 
-						LocalDate.now()
-						.with(TemporalAdjusters.lastDayOfYear()));
-	}
-	
-	public void addClase(Clase c) {
-		clases.add(c);
-		c.getAlumnos().add(this);
-	}
-	
-	public void removeClase(Clase c) {
-		clases.remove(c);
-		c.getAlumnos().remove(this);
-	}
-	
-	
-	
-	
 	
 	
 }
