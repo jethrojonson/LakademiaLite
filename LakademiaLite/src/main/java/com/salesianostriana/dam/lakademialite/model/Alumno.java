@@ -21,13 +21,11 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Data
-@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Alumno implements UserDetails{
@@ -49,6 +47,7 @@ public class Alumno implements UserDetails{
 	private String email;
 	
 	private String password;
+	private boolean admin;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable
@@ -75,8 +74,7 @@ public class Alumno implements UserDetails{
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		String role = "ALUMNO";
-		return Arrays.asList(new SimpleGrantedAuthority(role));
+		return Arrays.asList(new SimpleGrantedAuthority("ALUMNO"));
 	}
 
 	@Override

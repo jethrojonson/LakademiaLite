@@ -19,7 +19,7 @@ public class LakademiaLiteApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner init(AlumnoServicio servicio, BCryptPasswordEncoder passwordEncoder) {
+	public CommandLineRunner init(AlumnoServicio alumnoServicio, BCryptPasswordEncoder passwordEncoder) {
 		return args -> {
 			
 			Alumno a1 = new Alumno();
@@ -29,8 +29,9 @@ public class LakademiaLiteApplication {
 			a1.setFechaNac(LocalDate.of(1993, 10, 24));
 			a1.setEmail("perez.gojer22@triana.salesianos.edu");
 			a1.setPassword(passwordEncoder.encode("1234"));
+			a1.setAdmin(false);
 			
-			servicio.save(a1);
+			alumnoServicio.save(a1);
 			
 			
 		};
