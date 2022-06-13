@@ -74,7 +74,7 @@ public class Alumno implements UserDetails{
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.asList(new SimpleGrantedAuthority("ALUMNO"));
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_ALUMNO"));
 	}
 
 	@Override

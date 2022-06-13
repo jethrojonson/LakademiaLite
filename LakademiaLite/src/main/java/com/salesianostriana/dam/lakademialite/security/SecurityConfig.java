@@ -31,14 +31,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	@Override
 	public void configure(AuthenticationManagerBuilder auth) throws Exception {
 		
-//		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 		
-		auth
-		.inMemoryAuthentication()
-		.passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder())
-		.withUser("admin")
-		.password("{noop}admin")
-		.roles("ADMIN");
+//		auth
+//		.inMemoryAuthentication()
+//		.passwordEncoder(PasswordEncoderFactories.createDelegatingPasswordEncoder())
+//		.withUser("admin")
+//		.password("{noop}admin")
+//		.roles("ADMIN");
 	}
 	
 	@Override
