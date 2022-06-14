@@ -45,15 +45,18 @@
 				class="bg-secondary text-light p-4 mx-auto fs-5 my-4 rounded-4 border border-dark border-5 text-center col-lg-4 col-11">
 				<div class="mb-3">
 					<h1 class="text-warning">LOG IN</h1>
-					<label for="email" class="form-label">Correo electrónico</label>
+					<h3 class="text-ligth" sec:authorize="isAuthenticated()">Ya estas logeado</h3>
+					<a class="fs-3 fw-bold text-info" sec:authorize="isAuthenticated()" th:href="@{/alumno/clases}">Mostrar clases disponibles</a>
+					<label for="email" class="form-label" sec:authorize="!isAuthenticated">Correo electrónico</label>
 					<input type="text" name="username" class="form-control text-center" id="username" required autofocus
-						aria-describedby="emailHelp" placeholder="correo@email.com">
+						aria-describedby="emailHelp" placeholder="correo@email.com" sec:authorize="!isAuthenticated">
 				</div>
 				<div class="mb-3">
-					<label for="exampleInputPassword1" class="form-label">Contraseña</label>
-					<input type="password" name="password" class="text-center form-control" id="password" required>
+					<label for="exampleInputPassword1" class="form-label" sec:authorize="!isAuthenticated">Contraseña</label>
+					<input type="password" name="password" sec:authorize="!isAuthenticated" class="text-center form-control" id="password" required>
 				</div>
-				<button type="submit" class="btn btn-danger" name="enviar" value="Enviar">Entrar</button>
+				<p th:if="${loginError}" class="error text-muted">Usuario y/o contraseña incorrectos</p>
+				<button sec:authorize="!isAuthenticated()" type="submit" class="btn btn-danger" name="enviar" value="Enviar">Entrar</button>
 			</form>
 
 		</main>

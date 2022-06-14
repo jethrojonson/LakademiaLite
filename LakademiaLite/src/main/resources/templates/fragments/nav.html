@@ -35,24 +35,35 @@
                             th:href="@{/alumno/clases}">Clases</a>
                     </li>
                     <li class="nav-item">
-                        <!-- Example split danger button -->
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-danger"><span sec:authentication="name">LOG IN</span></button>
-                            <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
-                                data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="visually-hidden">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="./login.html"
-                                        th:href="@{/login}">Entrar</a></li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-                                <li><a class="dropdown-item" href="href./registro.html"
-                                        th:href="@{/registro}">Registrarse</a></li>
-                                <li><form th:action="@{/logout}" method="POST" id="logoutForm"></form>
-                                    <a class="dropdown-item text-decoration-none text-danger fw-bold" href="javascript:document.getElementById('logoutForm').submit()">Salir</a></li>
-                            </ul>
+                        <div class="dropdown-center">
+                            <div class="btn-group dropdown-center">
+                                <div type="button" class="btn btn-danger">
+                                    <span sec:authorize="isAuthenticated()" th:text="${nombre}"></span>
+                                    <span sec:authorize="!isAuthenticated()">LOG IN</span>
+                                </div>
+                                <button type="button" class="btn btn-danger dropdown-toggle dropdown-toggle-split"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                    <span class="visually-hidden">Toggle Dropdown</span>
+                                </button>
+                                <ul class="dropdown-menu text-center">
+                                    <li sec:authorize="!isAuthenticated()">
+                                        <a class="dropdown-item" href="./login.html" th:href="@{/login}">Entrar</a>
+                                    </li>
+                                    <li sec:authorize="!isAuthenticated()">
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li sec:authorize="!isAuthenticated()">
+                                        <a class="dropdown-item" href="href./registro.html"
+                                            th:href="@{/registro}">Registrarse</a>
+                                    </li>
+                                    <li>
+                                        <form th:action="@{/logout}" method="POST" id="logoutForm"></form>
+                                        <a sec:authorize="isAuthenticated()"
+                                            class="dropdown-item text-decoration-none text-danger fw-bold"
+                                            href="javascript:document.getElementById('logoutForm').submit()">Salir</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </li>
                 </ul>

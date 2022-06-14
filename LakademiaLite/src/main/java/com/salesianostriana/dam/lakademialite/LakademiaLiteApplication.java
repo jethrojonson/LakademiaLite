@@ -8,7 +8,9 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+import com.salesianostriana.dam.lakademialite.model.Admin;
 import com.salesianostriana.dam.lakademialite.model.Alumno;
+import com.salesianostriana.dam.lakademialite.service.AdminServicio;
 import com.salesianostriana.dam.lakademialite.service.AlumnoServicio;
 
 @SpringBootApplication
@@ -23,7 +25,7 @@ public class LakademiaLiteApplication {
 		return args -> {
 			
 			Alumno a1 = new Alumno();
-			a1.setNombre("Jerónimo Manuel");
+			a1.setNombre("Jeronimo M.");
 			a1.setApellidos("Pérez González");
 			a1.setDni("54104807-K");
 			a1.setFechaNac(LocalDate.of(1993, 10, 24));
@@ -33,6 +35,17 @@ public class LakademiaLiteApplication {
 			
 			alumnoServicio.save(a1);
 			
+			
+		};
+	}
+	
+	@Bean
+	public CommandLineRunner init(AdminServicio adminServicio, BCryptPasswordEncoder passwordEncoder) {
+		return args -> {
+			
+			Admin admin1 = new Admin();
+			admin1.setUsername("Luismi");
+			admin1.setPassword(passwordEncoder.encode("1234"));
 			
 		};
 	}

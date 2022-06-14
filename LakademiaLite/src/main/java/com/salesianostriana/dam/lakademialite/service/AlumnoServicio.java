@@ -1,5 +1,7 @@
 package com.salesianostriana.dam.lakademialite.service;
 
+import java.util.Optional;
+
 import org.springframework.stereotype.Service;
 
 import com.salesianostriana.dam.lakademialite.model.Alumno;
@@ -11,6 +13,10 @@ public class AlumnoServicio extends BaseService<Alumno, Long, IAlumnoRepository>
 	
 	public AlumnoServicio(IAlumnoRepository repo) {
 		super(repo);
+	}
+	
+	public Optional<Alumno> buscarPorEmail(String email) {
+		return repositorio.findFirstByEmail(email);
 	}
 	
 }
