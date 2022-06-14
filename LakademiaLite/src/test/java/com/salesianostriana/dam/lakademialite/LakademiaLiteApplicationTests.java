@@ -26,9 +26,8 @@ class LakademiaLiteApplicationTests {
 		alumno.setApellidos("Jiménez Infante");
 		alumno.setDni("12345678-J");
 		alumno.setFechaNac(LocalDate.of(1997, 01, 10));
-		alumno.setEmail("antonio@email.es");
-		alumno.setPassword("1234");
-		alumno.setAdmin(false);
+		alumno.setEmail("jimenez.inant22@triana.salesianos.edu");
+		alumno.setPassword("skate");
 		
 		Alumno retorno= repo.save(alumno);
 		

@@ -41,43 +41,46 @@
 		<main class="container-lg container-fluid aling-self-center px-0 px-lg-4">
 
 			<!--FORMULARIO DE REGISTRO-->
-			<form method="POST" action="#" th:action="@{/login}"
+			<form method="POST" action="#" th:action="@{/registro/submit}" th:object="${alumno}"
 				class="bg-secondary text-light p-4 mx-auto fs-5 my-4 rounded-4 border border-dark border-5 text-center col-lg-8 col-11 container-fluid row">
 				<h1 class="text-warning">Registro de usuario</h1>
-				<h3 class="py-3">Datos personales</h3>
-				<div class="mb-3 col-12 col-lg-6">
+				<h3 sec:authorize="isAuthenticated()">Usted ya esta registrado como <span th:text="${rol}"></span></h3>
+				<h3 sec:authorize="!isAuthenticated" class="py-3">Datos personales</h3>
+				<div sec:authorize="!isAuthenticated" class="mb-3 col-12 col-lg-6">
 					<label for="nombre" class="form-label">Nombre</label>
 					<input type="text" name="nombre" class="form-control text-center" id="nombre" required autofocus
-						aria-describedby="nombreAlumno" placeholder="Nombre completo">
+						th:field="*{nombre}" aria-describedby="nombreAlumno" placeholder="Nombre completo">
 				</div>
-				<div class="mb-3 col-12 col-lg-6">
+				<div sec:authorize="!isAuthenticated" class="mb-3 col-12 col-lg-6">
 					<label for="apellidos" class="form-label">Apellidos</label>
-					<input type="text" name="apellidos" class="text-center form-control" id="apellidos" placeholder="Apellidos completos" required>
+					<input type="text" name="apellidos" class="text-center form-control" id="apellidos"
+						th:field="*{apellidos}" placeholder="Apellidos completos" required>
 				</div>
-				<div class="mb-3 col-12 col-lg-6">
+				<div sec:authorize="!isAuthenticated" class="mb-3 col-12 col-lg-6">
 					<label for="dni" class="form-label">DNI/NIE</label>
 					<input type="text" name="dni" class="form-control text-center" id="dni" required autofocus
-						aria-describedby="dniAlumno" placeholder="12345678-A">
+						th:field="*{dni}" aria-describedby="dniAlumno" placeholder="00000000-A">
 				</div>
-				<div class="mb-3 col-12 col-lg-6">
+				<div sec:authorize="!isAuthenticated" class="mb-3 col-12 col-lg-6">
 					<label for="fechaNac" class="form-label">Fecha de nacimiento</label>
-					<input type="date" name="fechaNac" class="text-secondary text-center form-control" id="fechaNac" required>
+					<input th:field="*{fechaNac}" type="date" name="fechaNac" class="text-secondary text-center form-control" id="fechaNac">
 				</div>
-				<h3 class="py-3">Datos de Usuario</h3>
-				<div class="mb-3">
+				<h3 sec:authorize="!isAuthenticated" class="py-3">Datos de Usuario</h3>
+				<div sec:authorize="!isAuthenticated" class="mb-3">
 					<label for="email" class="form-label">Correo electrónico</label>
 					<input type="text" name="username" class="form-control text-center" id="username" required autofocus
-						aria-describedby="emailHelp" placeholder="correo@email.com">
+						th:field="*{email}" aria-describedby="emailHelp" placeholder="correo@email.com">
 				</div>
-				<div class="mb-3">
+				<div sec:authorize="!isAuthenticated" class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">Contraseña</label>
-					<input type="password" name="password" class="text-center form-control" id="password" required>
+					<input th:field="*{password}" type="password" name="password" class="text-center form-control" id="password" required>
 				</div>
-				<div class="mb-3">
+				<div sec:authorize="!isAuthenticated" class="mb-3">
 					<label for="exampleInputPassword1" class="form-label">Confirmar Contraseña</label>
 					<input type="password" name="password" class="text-center form-control" id="password" required>
 				</div>
-				<button type="submit" class="btn btn-danger col-lg-5 col-11 mx-auto" name="enviar" value="Enviar">Registrarse</button>
+				<button sec:authorize="!isAuthenticated" type="submit" class="btn btn-danger col-lg-5 col-11 mx-auto"
+					name="enviar" value="Enviar">Registrarse</button>
 			</form>
 
 		</main>

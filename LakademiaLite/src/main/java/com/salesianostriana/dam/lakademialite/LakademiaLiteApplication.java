@@ -6,7 +6,6 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import com.salesianostriana.dam.lakademialite.model.Admin;
 import com.salesianostriana.dam.lakademialite.model.Alumno;
@@ -21,8 +20,15 @@ public class LakademiaLiteApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner init(AlumnoServicio alumnoServicio, BCryptPasswordEncoder passwordEncoder) {
+	public CommandLineRunner init(AlumnoServicio alumnoServicio) {
 		return args -> {
+			
+			Alumno alumno = new Alumno();
+			alumno.setNombre("user");
+			alumno.setEmail("user");
+			alumno.setPassword("1234");
+			
+			alumnoServicio.save(alumno);
 			
 			Alumno a1 = new Alumno();
 			a1.setNombre("Jeronimo M.");
@@ -30,8 +36,7 @@ public class LakademiaLiteApplication {
 			a1.setDni("54104807-K");
 			a1.setFechaNac(LocalDate.of(1993, 10, 24));
 			a1.setEmail("perez.gojer22@triana.salesianos.edu");
-			a1.setPassword(passwordEncoder.encode("1234"));
-			a1.setAdmin(false);
+			a1.setPassword("1234");
 			
 			alumnoServicio.save(a1);
 			
@@ -40,12 +45,20 @@ public class LakademiaLiteApplication {
 	}
 	
 	@Bean
-	public CommandLineRunner init(AdminServicio adminServicio, BCryptPasswordEncoder passwordEncoder) {
+	public CommandLineRunner init1(AdminServicio adminServicio) {
 		return args -> {
 			
-			Admin admin1 = new Admin();
-			admin1.setUsername("Luismi");
-			admin1.setPassword(passwordEncoder.encode("1234"));
+			Admin admin = new Admin();
+			admin.setUsername("admin");
+			admin.setPassword("admin");
+			
+			adminServicio.save(admin);
+			
+			Admin ad1 = new Admin();
+			ad1.setUsername("Luismi");
+			ad1.setPassword("1234");
+			
+			adminServicio.save(ad1);
 			
 		};
 	}

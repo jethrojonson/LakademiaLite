@@ -49,7 +49,10 @@
                                     <li sec:authorize="!isAuthenticated()">
                                         <a class="dropdown-item" href="./login.html" th:href="@{/login}">Entrar</a>
                                     </li>
-                                    <li sec:authorize="!isAuthenticated()">
+                                    <li sec:authorize="isAuthenticated()">
+                                        <span class="text-muted" th:text="${rol}"></span>
+                                    </li>
+                                    <li>
                                         <hr class="dropdown-divider">
                                     </li>
                                     <li sec:authorize="!isAuthenticated()">

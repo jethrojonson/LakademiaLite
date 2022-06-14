@@ -16,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -39,6 +40,8 @@ public class Alumno implements UserDetails{
 	private String nombre;
 	private String apellidos;
 	private String dni;
+	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNac;
 	
 	/*USERNAME*/
@@ -47,7 +50,6 @@ public class Alumno implements UserDetails{
 	private String email;
 	
 	private String password;
-	private boolean admin;
 	
 	@ManyToMany(fetch = FetchType.EAGER)
 	@JoinTable
@@ -74,7 +76,7 @@ public class Alumno implements UserDetails{
 	
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		return Arrays.asList(new SimpleGrantedAuthority("ROLE_USER"));
+		return Arrays.asList(new SimpleGrantedAuthority("ROLE_ALUMNO"));
 	}
 
 	@Override
@@ -102,5 +104,10 @@ public class Alumno implements UserDetails{
 		return true;
 	}
 	
+	/*METODOS EXTRA*/
+	
+	public String getRol() {
+		return "ALUMNO";
+	}
 	
 }
