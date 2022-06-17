@@ -1,11 +1,13 @@
 package com.salesianostriana.dam.lakademialite.model;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,11 +37,12 @@ public class Alumno implements UserDetails{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private long id;
 	
 	private String nombre;
 	private String apellidos;
 	private String dni;
+	private double totalGastado;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate fechaNac;
@@ -51,19 +54,24 @@ public class Alumno implements UserDetails{
 	
 	private String password;
 	
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany
+		(
+				fetch = FetchType.EAGER,
+				cascade = {CascadeType.PERSIST,CascadeType.MERGE}
+		)
 	@JoinTable
 		(
 			name = "alumno_clases",
 			joinColumns = @JoinColumn (name = "alumno_id"),
 			inverseJoinColumns = @JoinColumn (name = "clase_id")
 		)
-	private List <Clase> listaClases = new ArrayList <Clase>();
+	private List <Clase> listaClases = new ArrayList <>();
 	
 	/*METODOS HELPERS*/
 	
 	public void addClase(Clase c) {
 		listaClases.add(c);
+		this.totalGastado+=c.getPrecio();
 		c.getListaAlumnos().add(this);
 	}
 	
@@ -109,5 +117,13 @@ public class Alumno implements UserDetails{
 	public String getRol() {
 		return "ALUMNO";
 	}
+	
+	public long getEdad() {
+		long edad;
+		edad = ChronoUnit.YEARS.between(fechaNac, LocalDate.now());
+		return edad;
+	}
+	
+	
 	
 }

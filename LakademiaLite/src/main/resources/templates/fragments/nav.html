@@ -59,6 +59,27 @@
                                         <a class="dropdown-item" href="href./registro.html"
                                             th:href="@{/registro}">Registrarse</a>
                                     </li>
+                                    <li sec:authorize="hasRole('ROLE_ADMIN')">
+                                        <a class=" dropdown-item" href="#" th:href="@{/admin/gestion}">Gestion Users</a>
+                                    </li>
+                                    <li sec:authorize="hasRole('ROLE_ADMIN')">
+                                        <a class=" dropdown-item" href="./editar.html" th:href="@{/admin/nuevaClase}">Nueva clase</a>
+                                    </li>
+                                    <li sec:authorize="hasRole('ROLE_ADMIN')">
+                                        <hr class="dropdown-divider">
+                                    </li>
+                                    <li sec:authorize="isAuthenticated()">
+                                        <a class="dropdown-item" href="./clases.html#ofertaClases" th:href="@{/alumno/clases#ofertaClases}">Oferta Clases</a>
+                                    </li>
+                                    <li sec:authorize="hasRole('ROLE_ALUMNO')">
+                                        <a class="dropdown-item" href="./clases.html#ofertaClases" th:href="@{/alumno/clases#verClases}">Mis Clases</a>
+                                    </li>
+                                    <li sec:authorize="hasRole('ROLE_ADMIN')">
+                                        <a class="dropdown-item" href="./clases.html#ofertaClases" th:href="@{/alumno/clases#verClases}">Info Clases</a>
+                                    </li>
+                                    <li>
+                                        <hr sec:authorize="isAuthenticated()" class="dropdown-divider">
+                                    </li>
                                     <li>
                                         <form th:action="@{/logout}" method="POST" id="logoutForm"></form>
                                         <a sec:authorize="isAuthenticated()"

@@ -30,6 +30,17 @@ public class LakademiaLiteApplication {
 			
 			alumnoServicio.save(alumno);
 			
+			Alumno angel = new Alumno();
+			angel.setNombre("Angel");
+			angel.setApellidos("Naranjo");
+			angel.setDni("76530912-J");
+			angel.setFechaNac(LocalDate.of(1979,02,12));
+			angel.setEmail("Angel@profe.com");
+			angel.setPassword("1234");
+			
+			alumnoServicio.save(angel);
+			
+			
 			Alumno a1 = new Alumno();
 			a1.setNombre("Jeronimo M.");
 			a1.setApellidos("Pérez González");
@@ -39,6 +50,36 @@ public class LakademiaLiteApplication {
 			a1.setPassword("1234");
 			
 			alumnoServicio.save(a1);
+			
+			Alumno a2 = new Alumno();
+			a2.setNombre("Rogelio");
+			a2.setApellidos("Mohigefer");
+			a2.setDni("58931025-H");
+			a2.setFechaNac(LocalDate.of(1989, 06, 9));
+			a2.setEmail("roge-music@nuevoberlin.es");
+			a2.setPassword("hola");
+			
+			alumnoServicio.save(a2);
+			
+			Alumno a3 = new Alumno();
+			a3.setNombre("Antonio");
+			a3.setApellidos("Jiménez Infante");
+			a3.setDni("14368529-W");
+			a3.setFechaNac(LocalDate.of(1998, 9, 21));
+			a3.setEmail("ska8@mail.com");
+			a3.setPassword("peta");
+			
+			alumnoServicio.save(a3);
+			
+			Alumno a4 = new Alumno();
+			a4.setNombre("Jaime");
+			a4.setApellidos("Cárdenas");
+			a4.setDni("11123558-D");
+			a4.setFechaNac(LocalDate.of(1994, 11, 25));
+			a4.setEmail("pro-gramer@hacker.es");
+			a4.setPassword("hack");
+			
+			alumnoServicio.save(a4);
 			
 			
 		};

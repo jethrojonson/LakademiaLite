@@ -10,4 +10,6 @@ public interface IAlumnoRepository extends JpaRepository <Alumno, Long>{
 	
 	Optional<Alumno> findFirstByEmail(String email);
 
+//	@Query("select")
+	
 }

@@ -27,7 +27,7 @@ public class Admin implements UserDetails{
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Long id;
+	private long id;
 	
 	@Column(unique = true)
 	private String username;

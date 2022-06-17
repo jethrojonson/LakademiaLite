@@ -6,10 +6,10 @@
 	<meta charset="UTF-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="Página donde se muestran las clases">
+	<meta name="description" content="Página donde se gestionan los usuarios">
 	<meta name="author" content="Jerónimo M Pérez González">
 
-	<title>Lakademia - Clases</title>
+	<title>Lakademia - Gestión</title>
 
 	<!--Icono Pestañas-->
 	<link rel="shortcut icon" href="../static/img/logo LK.png" th:href="@{/img/logo LK.png}" type="image/x-icon">
@@ -40,13 +40,83 @@
 		<!--Contenido Principal-->
 		<main class="container-lg container-fluid aling-self-center px-0 px-lg-4">
 
-			<!--Clases Ofertadas-->
-			<section class="container-fluid row text-center p-4 mx-auto justify-content-evenly">
+			<!--Alumnos Registrados-->
+			<section class="container-fluid text-center p-4 mx-auto justify-content-evenly">
 
-				<h1 id="ofertaClases" class="text-success bg-dark border-secondary border-5 border rounded-5">Oferta de
-					Clases</h1>
+				<h1 id="adminsRegistrados" class="col-lg-4 col-12 text-warning bg-dark border-secondary border-5 mx-auto border rounded-5">
+					Admins</h1>
 
-				<div th:each="clase : ${clases}"
+				<div class="table-resposive text-center container col-lg-4 col-12">
+					<table class="table table-dark table-striped border-5 border mt-3 border-secondary ">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">USERNAME</th>
+								
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="admin : ${adminsRegistrados}">
+								
+								<td th:text="${admin.id}" a>asdasdsad</td>
+								<td th:text="${admin.username}">adasdasd</td>
+								
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+				<h1 id="alumnosRegistrados" class="text-success bg-dark border-secondary border-5 border rounded-5">
+					Alumnos registrados</h1>
+
+				<div class="table-resposive">
+					<table class="table table-dark table-striped border-5 border mt-3 border-secondary">
+						<thead>
+							<tr>
+								<th scope="col">ID</th>
+								<th scope="col">Nombre</th>
+								<th scope="col">Apellidos</th>
+								<th scope="col">Correo</th>
+								<th scope="col">Fecha Nac</th>
+								<th scope="col">Invertido</th>
+								<th></th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="alumno : ${alumnosRegistrados}">
+								<th th:text="${alumno.id}">a</th>
+								<td th:text="${alumno.nombre}">a</td>
+								<td th:text="${alumno.apellidos}">a</td>
+								<td th:text="${alumno.email}">a</td>
+								<td th:text="${#temporals.format(alumno.fechaNac,'dd-MM-yyyy')}" a></td>
+								<td th:text="${#numbers.formatDecimal(alumno.totalGastado, 1, 2) + ' €'}"></td>
+								<td>
+									<a href="" th:href="@{/admin/borrarAlumno/{id}(id=${alumno.id})}" class=" pb-1 px-1 text-danger rounded-1 border-danger border-1 border"
+									 data-toggle="tooltip" data-placement="top" title="Eliminar Alumno">
+										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+											fill="currentColor" class="bi bi-trash3-fill my-1" viewBox="0 0 16 16">
+											<path
+												d="M11 1.5v1h3.5a.5.5 0 0 1 0 1h-.538l-.853 10.66A2 2 0 0 1 11.115 16h-6.23a2 2 0 0 1-1.994-1.84L2.038 3.5H1.5a.5.5 0 0 1 0-1H5v-1A1.5 1.5 0 0 1 6.5 0h3A1.5 1.5 0 0 1 11 1.5Zm-5 0v1h4v-1a.5.5 0 0 0-.5-.5h-3a.5.5 0 0 0-.5.5ZM4.5 5.029l.5 8.5a.5.5 0 1 0 .998-.06l-.5-8.5a.5.5 0 1 0-.998.06Zm6.53-.528a.5.5 0 0 0-.528.47l-.5 8.5a.5.5 0 0 0 .998.058l.5-8.5a.5.5 0 0 0-.47-.528ZM8 4.5a.5.5 0 0 0-.5.5v8.5a.5.5 0 0 0 1 0V5a.5.5 0 0 0-.5-.5Z" />
+										</svg>
+									</a>
+								</td>
+							</tr>
+							<tr>
+								<td class="fw-bold text-end">TOTAL ALUMNOS:</td>
+								<td th:text="${#lists.size(alumnosRegistrados)}"></td>
+								<td></td>
+								<td></td>
+								<td class="fw-bold text-end">TOTAL :</td>
+								<td th:text="${#numbers.formatDecimal(total,1,2) + ' €'}"></td>
+								<td></td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+
+
+
+				<!-- <div th:each="clase : ${clases}"
 					class="card col-12 col-lg-3 mx-3 my-3 bg-dark rouned-top rounded-5 text-center border text-light border-secondary border-5">
 					<img th:src="${not(#strings.isEmpty(clase.imgUrl))} ?  ${clase.imgUrl}: 'https://e7.pngegg.com/pngimages/50/978/png-clipart-theft-computer-icons-thief-miscellaneous-cdr.png'"
 						class="card-img-top rounded-circle my-3 img-clases border border-secondary"
@@ -55,12 +125,12 @@
 						<h5 class="card-title text-warning" th:text="${clase.tituloClase}">Lock-picking</h5>
 						<p class="card-text" th:text="${clase.descripcion}">Aprende todo sobre las cerraduras y ganzúa
 							de la mano de los mejores.</p>
-						<!-- <a href="#" class="btn btn-primary mt-3 rounded-5">+ INFO</a> -->
-						<div class="dropdown-center">
+						 <a href="#" class="btn btn-primary mt-3 rounded-5">+ INFO</a> -->
+				<!-- <div class="dropdown-center">
 							<button class="btn btn-primary dropdown-toggle rounded-5" type="button"
-								id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">+ INFO</button>
+								id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">+ INFO</button> -->
 
-							<!-- <p th:if="${apuntado}">
+				<!-- <p th:if="${apuntado}">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
 									class="bi bi-check2-circle" viewBox="0 0 16 16">
 									<path
@@ -70,7 +140,7 @@
 								</svg>Ya estás apuntado
 							</p> -->
 
-							<ul class="dropdown-menu text-center rounded-5 bg-light border border-3 border-primary"
+				<!-- <ul class="dropdown-menu text-center rounded-5 bg-light border border-3 border-primary"
 								aria-labelledby="dropdownMenuButton1">
 								<li class="fw-bold text-decoration-underline">Precio</li>
 								<li th:text="${#numbers.formatDecimal(clase.precio,1,2) + ' €'}">100 €</li>
@@ -93,8 +163,7 @@
 									th:href="@{/admin/verAlumnos/{id}(id=${clase.id})}">Ver alumnos</a>
 							</button>
 						</div>
-						<button sec:authorize="hasRole('ROLE_ADMIN')" type="button" data-toggle="tooltip"
-							data-placement="top" title="Editar Clase" id="editarBoton"
+						<button sec:authorize="hasRole('ROLE_ADMIN')" type="button" id="editarBoton"
 							class="btn btn-outline-warning rounded-5 mt-2">
 							<a href="" class="text-warning" th:href="@{/admin/editarClase/{id}(id=${clase.id})}">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -106,8 +175,7 @@
 								</svg>
 							</a>
 						</button>
-						<button sec:authorize="hasRole('ROLE_ADMIN')" type="button" data-toggle="tooltip"
-							data-placement="top" title="Borrar Clase" id="borrarBoton"
+						<button sec:authorize="hasRole('ROLE_ADMIN')" type="button" id="borrarBoton"
 							class=" btn btn-outline-danger rounded-5 mt-2">
 							<a href="" class="text-danger" th:href="@{/admin/borrarClase/{id}(id=${clase.id})}">
 								<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
@@ -118,12 +186,12 @@
 							</a>
 						</button>
 					</div>
-				</div>
+				</div> -->
 
 			</section>
 
 			<!--Clases Apuntadas-->
-			<section id="verClases" class="container-fluid row text-center p-4 mx-auto justify-content-evenly">
+			<!-- <section id="verClases" class="container-fluid row text-center p-4 mx-auto justify-content-evenly">
 
 				<h1 sec:authorize="hasRole('ROLE_ADMIN')"
 					class="text-success bg-dark border-secondary border-5 border rounded-5">
@@ -166,7 +234,6 @@
 								<th scope="col">Fecha</th>
 								<th scope="col">Hora</th>
 								<th scope="col">Precio</th>
-								<th></th>
 							</tr>
 						</thead>
 						<tbody>
@@ -176,31 +243,13 @@
 								<td th:text="${#temporals.format(claseDat.fecha,'dd-MM-yyyy')}">20/07/2022</td>
 								<td th:text="${claseDat.hora}">17:55</td>
 								<td th:text="${#numbers.formatDecimal(claseDat.precio, 1, 2) + ' €'}">100 €</td>
-								<td>
-									<a href="" th:href="@{/alumno/quitarClase/{id}(id=${claseDat.id})}"
-										class=" pb-1 px-1 ps-2 text-danger rounded-1 border-danger border-1 border"
-										data-toggle="tooltip" data-placement="top" title="Quitar">
-										<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-right" viewBox="0 0 16 16">
-											<path fill-rule="evenodd" d="M10 12.5a.5.5 0 0 1-.5.5h-8a.5.5 0 0 1-.5-.5v-9a.5.5 0 0 1 .5-.5h8a.5.5 0 0 1 .5.5v2a.5.5 0 0 0 1 0v-2A1.5 1.5 0 0 0 9.5 2h-8A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h8a1.5 1.5 0 0 0 1.5-1.5v-2a.5.5 0 0 0-1 0v2z"/>
-											<path fill-rule="evenodd" d="M15.854 8.354a.5.5 0 0 0 0-.708l-3-3a.5.5 0 0 0-.708.708L14.293 7.5H5.5a.5.5 0 0 0 0 1h8.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3z"/>
-										  </svg>
-									</a>
-								</td>
-							</tr>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td class="fw-bold text-end">Total Gastado: </td>
-								<td th:text="${#numbers.formatDecimal(totalGastado,1,2) + ' €'}">100 euros</td>
-								<td></td>
 							</tr>
 
 						</tbody>
 					</table>
 				</div>
 
-			</section>
+			</section> -->
 
 		</main>
 

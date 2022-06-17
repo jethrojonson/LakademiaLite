@@ -56,7 +56,7 @@
 					<input type="password" name="password" sec:authorize="!isAuthenticated" class="text-center form-control" id="password" required>
 				</div>
 				<p th:if="${loginError}" class="error text-muted">Usuario y/o contraseña incorrectos</p>
-				<button sec:authorize="!isAuthenticated()" type="submit" class="btn btn-danger" name="enviar" value="Enviar">Entrar</button>
+				<button sec:authorize="!isAuthenticated()" type="submit" class="w-50 fs-4 btn btn-danger" name="enviar" value="Enviar">Entrar</button>
 			</form>
 
 		</main>
